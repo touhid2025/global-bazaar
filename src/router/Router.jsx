@@ -11,6 +11,7 @@ import Signup from "../pages/Signup";
 import Error from "../pages/Error";
 import AddProduct from '../pages/AddProduct';
 import PrivateRoute from "../provider/PrivateRoute";
+import UpdateProduct from "../pages/UpdateProduct";
 
 
 
@@ -26,7 +27,13 @@ const router = createBrowserRouter([
               },
               {
                 path: '/all-products',
+                loader: ()=> fetch('http://localhost:3000/products'),
                 element: <AllProducts></AllProducts>,
+              },
+              {
+                path: '/update/:id',
+                loader: ()=> fetch('http://localhost:3000/products'),
+                element: <UpdateProduct></UpdateProduct>,
               },
               {
                path: '/categories',

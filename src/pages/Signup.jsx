@@ -188,17 +188,15 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen  flex items-center justify-center p-4">
+    <div className="min-h-screen bg-amber-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-			<div className="inline-flex items-center justify-center bg-emerald-100 p-4 rounded-full mb-4">
-            <FaLeaf className="text-emerald-600 text-3xl" />
-          </div>
-          <h1 className="text-3xl font-bold text-emerald-500">Join LeafyLove</h1>
-          <p className="mt-2 text-emerald-500">Create your account to start your plant journey</p>
+			
+          <h1 className="text-3xl font-bold text-amber-500">Join GlobalBazaar</h1>
+          <p className="mt-2 text-amber-500">Create your account to start your journey</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-emerald-100 shadow-xl rounded-xl p-6 md:p-8">
+        <form onSubmit={handleSubmit} className="bg-amber-100 shadow-xl rounded-xl p-6 md:p-8">
           {/* Profile Picture Upload */}
          
           {/* photo url */}
@@ -362,14 +360,14 @@ const Signup = () => {
 		  {/* Submit Button */}
           <button
             type="submit"
-            className={`w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg shadow-md transition duration-300 flex items-center justify-center mb-4 ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+            className={`w-full py-3 px-4 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg shadow-md transition duration-300 flex items-center justify-center mb-4 ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
             disabled={isLoading}
           >
             {isLoading ? (
               'Creating account...'
             ) : (
               <>
-                <FaLeaf className="mr-2" />
+                
                 Create Account
               </>
             )}
@@ -397,7 +395,7 @@ const Signup = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already have an account?
-              <Link to="/log/login" className="font-medium text-emerald-600 hover:text-emerald-500">
+              <Link to="/log/login" className="font-medium text-amber-600 hover:text-amber-500">
                 Sign in
               </Link>
             </p>

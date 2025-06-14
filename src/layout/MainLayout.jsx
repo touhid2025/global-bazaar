@@ -7,7 +7,7 @@ import Loader from '../component/Loader';
 const MainLayout = () => {
     const {state} = useNavigation()
     return (
-        <div>
+        <div className='bg-amber-50'>
             <Header></Header>
             {
                 state == 'loading'? <Loader></Loader>:<Outlet></Outlet>

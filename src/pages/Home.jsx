@@ -1,9 +1,10 @@
 import React from 'react';
+import BannerSlider from '../component/BannerSlider';
 
 const Home = () => {
     return (
-        <div>
-            <p className='text-8xl'>home....</p>
+        <div className='min-h-screen'>
+            <BannerSlider></BannerSlider>
         </div>
     );
 };

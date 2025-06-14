@@ -122,17 +122,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen  flex items-center justify-center p-4">
+    <div className="min-h-screen bg-amber-50  flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center bg-emerald-100 p-4 rounded-full mb-4">
-            <FaLeaf className="text-emerald-600 text-3xl" />
-          </div>
-          <h1 className="text-3xl font-bold text-emerald-500">Welcome Back</h1>
-          <p className="mt-2 text-emerald-500">Sign in to your LeafyLove account</p>
+          
+          <h1 className="text-3xl font-bold text-amber-600">Welcome Back</h1>
+          <p className="mt-2 text-amber-500">Sign in to your account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-emerald-100 shadow-xl rounded-xl p-6 md:p-8">
+        <form onSubmit={handleSubmit} className="bg-amber-100 shadow-xl rounded-xl p-6 md:p-8">
           {/* Email Field */}
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -189,7 +187,7 @@ const Login = () => {
             </div>
             {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password}</p>}
             <div className="mt-2 text-right">
-              <Link className="text-sm text-emerald-600 hover:text-emerald-500">
+              <Link className="text-sm text-amber-600 hover:text-amber-500">
                 Forgot password?
               </Link>
             </div>
@@ -198,14 +196,14 @@ const Login = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className={`w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg shadow-md transition duration-300 flex items-center justify-center ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+            className={`w-full py-3 px-4 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg shadow-md transition duration-300 flex items-center justify-center ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
             disabled={isLoading}
           >
             {isLoading ? (
               'Signing in...'
             ) : (
               <>
-                <FaLeaf className="mr-2" />
+                
                 Sign In
               </>
             )}
@@ -234,7 +232,7 @@ const Login = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
-              <Link to="/log/signup" className="font-medium text-emerald-600 hover:text-emerald-500">
+              <Link to="/log/signup" className="font-medium text-amber-600 hover:text-amber-500">
                 Create one
               </Link>
             </p>

@@ -3,6 +3,7 @@ import { FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { Tooltip } from "react-tooltip";
 
 const Header = () => {
   const {user,logOut} = use(AuthContext);
@@ -15,7 +16,7 @@ const Header = () => {
     { name: "All Products", href: "/all-products" },
     { name: "Add Product", href: "/add-product" },
     { name: "My Products", href: "/my-products" },
-    { name: "Cart", href: "/cart", icon: <FaShoppingCart /> },
+    { name: "Cart 0", href: "/cart", icon: <FaShoppingCart /> },
   ];
 
   const handleLogout =()=>{
@@ -39,10 +40,10 @@ const Header = () => {
     }
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <nav className="bg-amber-700/5 backdrop-blur-2xl mx-2 md:mx-5 rounded-lg sticky top-2 z-50">
+      <div to={'/'} className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-2xl font-bold text-green-600">B2Bulk</div>
+        <Link className="text-2xl cursor-pointer font-bold text-gray-900">Gobal<span className="text-amber-600">Bazaar</span></Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
@@ -50,7 +51,7 @@ const Header = () => {
             <NavLink
               key={link.name}
               to={link.href}
-              className="text-gray-700 hover:text-green-600 transition"
+              className="text-gray-800 hover:text-amber-600 transition"
             >
               {link.icon ? (
                 <span className="flex items-center gap-1">
@@ -60,23 +61,59 @@ const Header = () => {
               ) : (
                 link.name
               )}
+              
             </NavLink>
           ))}
+          <NavLink to={'/cart'} className="relative cursor-pointer flex gap-1 items-center">
+            <FaShoppingCart/>
+            <span>Cart</span>
+            <span className="absolute -top-3 left-3">0</span>
+          </NavLink>
+          {/* image */}
+          
+            {
+              user&&<img src={user.photoURL}
+              data-tooltip-id="profile-tooltip"
+        data-tooltip-html={
+          `<strong>${user?.displayName}</strong><br/>
+          ${user?.email}
+          `
+        }
+              className="w-12 h-12 rounded-full" referrerPolicy="no-referrer" alt="profile" />
+            }
+          
           {
-            user? (<div className="ml-4"><button className="px-4 py-1 border rounded text-green-600 border-green-600 hover:bg-green-600 hover:text-white transition" onClick={handleLogout}>Log out</button></div>):
+            user? (<div className=""><button className="px-4 py-1 border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition" onClick={handleLogout}>Log out</button></div>):
             (<div className="ml-4 flex gap-2">
-            <Link to={'/log/login'} className="px-4 py-1 border rounded text-green-600 border-green-600 hover:bg-green-600 hover:text-white transition">
+            <Link to={'/log/login'} className="px-4 py-1 border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition">
               Log in
             </Link>
-            <Link to={'/log/signup'} className="px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition">
+            <Link to={'/log/signup'} className="px-4 py-1 bg-amber-600 text-white rounded hover:bg-amber-700 transition">
               Register
             </Link>
           </div>)
           }
         </div>
 
+        <Tooltip
+        id="profile-tooltip"
+        place="bottom"
+        effect="solid"
+        className=" text-xl"
+      />
+
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex">
+          {
+              user&&<img src={user.photoURL}
+              data-tooltip-id="profile-tooltip"
+        data-tooltip-html={
+          `<strong>${user?.displayName}</strong><br/>
+          ${user?.email}
+          `
+        }
+              className="w-10 h-10 rounded-full mr-4" referrerPolicy="no-referrer" alt="profile" />
+            }
           <button onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
@@ -90,7 +127,7 @@ const Header = () => {
             <NavLink
               key={link.name}
               to={link.href}
-              className="block text-gray-700 hover:text-green-600"
+              className="block text-gray-800 hover:text-amber-600"
             >
               {link.icon ? (
                 <span className="flex items-center gap-1">
@@ -102,14 +139,23 @@ const Header = () => {
               )}
             </NavLink>
           ))}
-          <div className="flex flex-col gap-2 pt-2">
-            <button className="px-4 py-1 border rounded text-green-600 border-green-600 hover:bg-green-600 hover:text-white transition">
+          <NavLink to={'/cart'} className="relative cursor-pointer flex gap-1 items-center">
+            <FaShoppingCart/>
+            <span>Cart</span>
+            <span className="absolute -top-3 left-2.5">0</span>
+          </NavLink>
+          
+          {
+            user? (<div className=""><button className="px-4 py-1 w-full border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition" onClick={handleLogout}>Log out</button></div>):
+            (<div className="flex flex-col">
+            <Link to={'/log/login'} className="px-4 py-1 mb-2.5 border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition">
               Log in
-            </button>
-            <button className="px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition">
+            </Link>
+            <Link to={'/log/signup'} className="px-4 py-1 bg-amber-600 text-white rounded hover:bg-amber-700 transition">
               Register
-            </button>
-          </div>
+            </Link>
+          </div>)
+          }
         </div>
       )}
     </nav>
