@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import ReactStars from 'react-rating-stars-component';
+import ReactStars from 'react-stars'
 import { useLoaderData, useNavigate, useParams } from 'react-router';
+import Swal from 'sweetalert2';
 
 const UpdateProduct = () => {
     const products = useLoaderData();
@@ -33,7 +34,6 @@ const UpdateProduct = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleRatingChange = (newRating) => {
     setFormData({ ...formData, rating: newRating });
   };
@@ -41,12 +41,36 @@ const UpdateProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData)
+    fetch(`http://localhost:3000/products/${product._id}`,{
+        method: 'PUT',
+        headers: {
+            'content-type':'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        if(data.modifiedCount){
+            Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Plant updated successfully",
+  showConfirmButton: false,
+  timer: 1500
+});
     navigate('/all-products')
+        }
+    })
+    
+    
      // Function passed to handle updating logic
   };
 
+
+  
+
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-amber-100 shadow-md rounded-lg">
       <h2 className="text-2xl font-semibold mb-4 text-center">Update Product</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="mb-1 font-semibold">Image URL</label>
@@ -76,6 +100,7 @@ const UpdateProduct = () => {
           onChange={handleChange}
           className="w-full border p-2 rounded"
         />
+        <label className="mb-1 font-semibold">Category</label>
         <select
           name="category"
           defaultValue={formData.category}
@@ -87,9 +112,10 @@ const UpdateProduct = () => {
             <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
+        <label className="mb-1 font-semibold">Rating</label>
         <ReactStars
           count={5}
-          defaultValue={formData.rating}
+          value={formData.rating}
           onChange={handleRatingChange}
           size={24}
           activeColor="#ffd700"
@@ -122,7 +148,7 @@ const UpdateProduct = () => {
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-800"
         >
           Update Product
         </button>

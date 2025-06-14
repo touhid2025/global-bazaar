@@ -1,7 +1,8 @@
-import { use, useState } from "react";
+import { useState, useContext } from "react";
 import { FaUpload, FaTag, FaListUl } from "react-icons/fa";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import ReactStars from 'react-stars'
 
 const categories = [
   "Electronics & Gadgets",
@@ -14,7 +15,7 @@ const categories = [
 ];
 
 const AddProduct = () => {
-  const {user} = use(AuthContext);
+  const { user } = useContext(AuthContext);
   const [product, setProduct] = useState({});
 
   const handleChange = (e) => {
@@ -27,27 +28,22 @@ const AddProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(product);
 
-    fetch('http://localhost:3000/products',{
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(product)
+    fetch("http://localhost:3000/products", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(product),
     })
-    .then(res=>res.json())
-    .then(data=>{
-      if(data.insertedId){
-          
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
           Swal.fire({
-  title: "Added Successfully!",
-  icon: "success",
-  draggable: true
-});
+            title: "Added Successfully!",
+            icon: "success",
+            draggable: true,
+          });
         }
-    })
-    // Submit logic here
+      });
   };
 
   return (
@@ -101,7 +97,7 @@ const AddProduct = () => {
           />
         </div>
 
-        {/* Product Image File */}
+        {/* Product Image File (hidden for now) */}
         <div className="flex flex-col hidden">
           <label className="mb-1 font-semibold">Upload Image</label>
           <input
@@ -151,6 +147,7 @@ const AddProduct = () => {
             required
           />
         </div>
+
         {/* Brand */}
         <div className="flex flex-col">
           <label className="mb-1 font-semibold">Brand Name</label>
@@ -206,22 +203,22 @@ const AddProduct = () => {
           />
         </div>
 
-        {/* Rating */}
+        {/*  Rating */}
         <div className="flex flex-col">
-          <label className="mb-1 font-semibold">Rating (1–5)</label>
-          <input
-            type="number"
-            name="rating"
-            min="1"
-            max="5"
-            placeholder="e.g., 4.5"
-            onChange={handleChange}
-            className="input border border-gray-300 px-3 py-2 rounded-md"
-            required
+          <label className="mb-1 font-semibold">Rating</label>
+          <ReactStars
+            count={5}
+            size={30}
+            isHalf={true}
+            value={product.rating || 0}
+            activeColor="#ffd700"
+            onChange={(newRating) =>
+              setProduct((prev) => ({ ...prev, rating: newRating }))
+            }
           />
         </div>
 
-        {/* Submit */}
+        {/* Submit Button */}
         <div className="md:col-span-2">
           <button
             type="submit"

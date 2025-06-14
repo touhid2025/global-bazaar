@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FaEdit } from 'react-icons/fa';
-import ReactStars from 'react-rating-stars-component';
+import ReactStars from 'react-stars'
 import { Link, useLoaderData } from 'react-router';
 
-
-    // Dummy fetch, replace with real API
-    
-  
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -14,7 +10,9 @@ const AllProducts = () => {
   const [viewMode, setViewMode] = useState('card');
   const data = useLoaderData();
 
-  
+    
+
+
     useEffect(() => {
     setProducts(data);
   }, []);
@@ -28,13 +26,13 @@ const AllProducts = () => {
       <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
         <button
           onClick={() => setAvailableOnly(!availableOnly)}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          className="bg-amber-600 text-white px-4 py-2 rounded shadow-md hover:bg-amber-700"
         >
           {availableOnly ? 'Show All Products' : 'Show Available Products'}
         </button>
 
         <select
-          className="border px-3 py-2 rounded"
+          className="border text-amber-600 outline-0 hover:bg-amber-600 hover:text-white border-amber-500 px-3 py-2 rounded"
           value={viewMode}
           onChange={(e) => setViewMode(e.target.value)}
         >
@@ -43,54 +41,59 @@ const AllProducts = () => {
         </select>
       </div>
 
-      {/* Table View */}
+      {/* Table View overflow-x-auto */}
       {viewMode === 'table' && (
-        <div className="overflow-x-auto">
-          <table className="table w-full border">
-            <thead className="bg-gray-100">
-              <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Quantity</th>
-                <th>Min Qty</th>
-                <th>Rating</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody >
-              {filteredProducts.map((product) => (
-                <tr key={product._id}>
-                  <td>
-                    <img src={product.imageURL} alt={product.name} className="w-16" />
-                  </td>
-                  <td>{product.name}</td>
-                  <td>{product.brand}</td>
-                  <td>{product.category}</td>
-                  <td>{product.quantity}</td>
-                  <td>{product.minQuantity}</td>
-                  <td> 
-                  
-                    <ReactStars
-                      count={5}
-                      value={product.rating}
-                      size={24}
-                      edit={false}
-                      activeColor="#ffd700"
-                      
-                    />
-                  </td>
-                  <td>
-                    <Link to={`/update/${product._id}`} className="mt-3 p-1 text-2xl rounded-lg text-indigo-600 hover:text-indigo-800">
-                <FaEdit className="inline" />
-              </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <div className="overflow-x-auto rounded-md shadow-lg">
+  <table className="table w-full text-center">
+    <thead className="bg-amber-700 text-white">
+      <tr>
+        <th className="py-3">Image</th>
+        <th className="py-3">Name</th>
+        <th className="py-3 hidden md:table-cell">Brand</th>
+        <th className="py-3 hidden md:table-cell">Category</th>
+        <th className="py-3 hidden md:table-cell">Quantity</th>
+        <th className="py-3">Min Qty</th>
+        <th className="py-3 hidden md:table-cell">Rating</th>
+        <th className="py-3">Action</th>
+      </tr>
+    </thead>
+    <tbody className="bg-amber-100 text-gray-800">
+      {filteredProducts.map((product) => (
+        <tr key={product._id} className="hover:bg-amber-200">
+          <td className="py-2 px-4">
+            <img
+              src={product.imageURL}
+              alt={product.name}
+              className="w-16 h-10 object-cover mx-auto rounded"
+            />
+          </td>
+          <td className="py-2 px-4">{product.name}</td>
+          <td className="py-2 px-4 hidden md:table-cell">{product.brand}</td>
+          <td className="py-2 px-4 hidden md:table-cell">{product.category}</td>
+          <td className="py-2 px-4 hidden md:table-cell">{product.quantity}</td>
+          <td className="py-2 px-4">{product.minQuantity}</td>
+          <td className="py-2 px-4 hidden md:table-cell">
+            <ReactStars
+              count={5}
+              value={product.rating}
+              size={20}
+              edit={false}
+              activeColor="#ffd700"
+            />
+          </td>
+          <td className="py-2 px-4">
+            <Link
+              to={`/update/${product._id}`}
+              className="text-xl text-indigo-600 hover:text-indigo-800"
+            >
+              <FaEdit className="inline" />
+            </Link>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
       )}
 
       {/* Card View */}
@@ -99,7 +102,7 @@ const AllProducts = () => {
           {filteredProducts.map((product) => (
             <div
               key={product._id}
-              className="border rounded-lg p-4 shadow hover:shadow-lg transition"
+              className=" rounded-lg p-4 shadow-2xl hover:shadow bg-amber-100 transition"
             >
               <img
                 src={product.imageURL}
@@ -118,9 +121,11 @@ const AllProducts = () => {
                 edit={false}
                 activeColor="#ffd700"
               />
-              <Link to={`/update/${product._id}`} className="mt-3 p-1 bg-indigo-600 text-2xl hover:bg-indigo-700 rounded-lg  text-white ">
-                <FaEdit className="inline-flex mr-2 " />
+              <div className='flex justify-end'>
+                <Link to={`/update/${product._id}`} className="mt-3 text-3xl  text-indigo-600 hover:text-indigo-800 ">
+                <FaEdit className="inline-flex " />
               </Link>
+              </div>
             </div>
           ))}
         </div>
