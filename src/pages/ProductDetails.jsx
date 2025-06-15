@@ -37,7 +37,7 @@ const ProductDetails = () => {
       return;
     }
 
-    /* 2️⃣ server-side request */
+    /* server-side request */
     fetch("http://localhost:3000/purchase", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
