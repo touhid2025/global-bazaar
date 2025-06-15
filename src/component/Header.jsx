@@ -12,11 +12,9 @@ const Header = () => {
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "Categories", href: "/categories" },
     { name: "All Products", href: "/all-products" },
     { name: "Add Product", href: "/add-product" },
     { name: "My Products", href: "/my-products" },
-    { name: "Cart 0", href: "/cart", icon: <FaShoppingCart /> },
   ];
 
   const handleLogout =()=>{
@@ -40,10 +38,10 @@ const Header = () => {
     }
 
   return (
-    <nav className="bg-amber-700/5 backdrop-blur-2xl mx-2 md:mx-5 rounded-lg sticky top-2 z-50">
+    <nav className="bg-amber-700/85 backdrop-blur-2xl mx-2 md:mx-5 rounded-lg sticky top-2 z-50">
       <div to={'/'} className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <Link className="text-2xl cursor-pointer font-bold text-gray-900">Gobal<span className="text-amber-600">Bazaar</span></Link>
+        <Link className="text-2xl cursor-pointer font-bold text-gray-900">Global<span className="text-white">Bazaar</span></Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
@@ -51,7 +49,7 @@ const Header = () => {
             <NavLink
               key={link.name}
               to={link.href}
-              className="text-gray-800 hover:text-amber-600 transition"
+              className="text-white py-1.5 px-3 rounded-2xl hover:text-amber-400 transition"
             >
               {link.icon ? (
                 <span className="flex items-center gap-1">
@@ -64,7 +62,7 @@ const Header = () => {
               
             </NavLink>
           ))}
-          <NavLink to={'/cart'} className="relative cursor-pointer flex gap-1 items-center">
+          <NavLink to={'/cart'} className="relative  text-white hover:text-amber-400 cursor-pointer flex gap-1 items-center">
             <FaShoppingCart/>
             <span>Cart</span>
             <span className="absolute -top-3 left-3">0</span>
@@ -83,12 +81,12 @@ const Header = () => {
             }
           
           {
-            user? (<div className=""><button className="px-4 py-1 border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition" onClick={handleLogout}>Log out</button></div>):
+            user? (<div className=""><button className="px-4 py-1 border rounded text-amber-600 bg-amber-50 border-amber-600 hover:bg-amber-600 hover:text-white transition" onClick={handleLogout}>Log out</button></div>):
             (<div className="ml-4 flex gap-2">
-            <Link to={'/log/login'} className="px-4 py-1 border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition">
+            <Link to={'/log/login'} className="px-4 bg-amber-50 py-1 border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition">
               Log in
             </Link>
-            <Link to={'/log/signup'} className="px-4 py-1 bg-amber-600 text-white rounded hover:bg-amber-700 transition">
+            <Link to={'/log/signup'} className="px-4 py-1 bg-amber-500 text-white rounded hover:bg-amber-600 transition">
               Register
             </Link>
           </div>)
@@ -127,7 +125,7 @@ const Header = () => {
             <NavLink
               key={link.name}
               to={link.href}
-              className="block text-gray-800 hover:text-amber-600"
+              className="block text-white hover:text-amber-400"
             >
               {link.icon ? (
                 <span className="flex items-center gap-1">
@@ -139,19 +137,19 @@ const Header = () => {
               )}
             </NavLink>
           ))}
-          <NavLink to={'/cart'} className="relative cursor-pointer flex gap-1 items-center">
+          <NavLink to={'/cart'} className="relative text-white hover:text-amber-400 cursor-pointer flex gap-1 items-center">
             <FaShoppingCart/>
             <span>Cart</span>
             <span className="absolute -top-3 left-2.5">0</span>
           </NavLink>
           
           {
-            user? (<div className=""><button className="px-4 py-1 w-full border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition" onClick={handleLogout}>Log out</button></div>):
+            user? (<div className=""><button className="px-4 py-1 w-full border bg-amber-50 rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition" onClick={handleLogout}>Log out</button></div>):
             (<div className="flex flex-col">
-            <Link to={'/log/login'} className="px-4 py-1 mb-2.5 border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition">
+            <Link to={'/log/login'} className="px-4 bg-amber-50 py-1 mb-2.5 border rounded text-amber-600 border-amber-600 hover:bg-amber-600 hover:text-white transition">
               Log in
             </Link>
-            <Link to={'/log/signup'} className="px-4 py-1 bg-amber-600 text-white rounded hover:bg-amber-700 transition">
+            <Link to={'/log/signup'} className="px-4 py-1 bg-amber-500 text-white rounded hover:bg-amber-600 transition">
               Register
             </Link>
           </div>)

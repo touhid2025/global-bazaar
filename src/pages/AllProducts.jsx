@@ -107,7 +107,7 @@ const AllProducts = () => {
               <img
                 src={product.imageURL}
                 alt={product.name}
-                className="w-full h-40 object-cover mb-4 rounded"
+                className="w-full h-40 object-cover mb-4 rounded border-4 hover:shadow-lg border-amber-200"
               />
               <h3 className="text-xl font-semibold mb-1">{product.name}</h3>
               <p className="text-sm text-gray-500 mb-1">Brand: {product.brand}</p>

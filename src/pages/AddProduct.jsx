@@ -32,7 +32,7 @@ const AddProduct = () => {
     fetch("http://localhost:3000/products", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(product),
+      body: JSON.stringify({userName: user.displayName, userEmail: user.email, ...product}),
     })
       .then((res) => res.json())
       .then((data) => {
