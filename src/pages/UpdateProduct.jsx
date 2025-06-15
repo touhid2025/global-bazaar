@@ -7,6 +7,7 @@ const UpdateProduct = () => {
     const products = useLoaderData();
     const {id} = useParams();
     const navigate = useNavigate();
+
     
     const product = products.find(plan => plan._id == id);
   const [formData, setFormData] = useState({

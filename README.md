@@ -1,12 +1,70 @@
-# React + Vite
+# 🛒 GlobalBazaar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+GlobalBazaar is a full-stack e-commerce web application where users can browse, search, filter, and manage products. The platform is responsive, secure, and offers an intuitive user experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live URL
 
-## Expanding the ESLint configuration
+🔗 [https://globalbazaar.web.app](https://globalbazaar.web.app)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🎯 Project Purpose
+
+The main goal of this project is to create a realistic and functional e-commerce site with:
+- Firebase Authentication
+- Product Filtering and Live Search
+- Toggle Between Card and Table Views
+- Protected Routes
+- Dynamic CRUD operations using MongoDB
+
+---
+
+## 🚀 Key Features
+
+- 🔐 Firebase Authentication (Email/Password login)
+- 🛍️ Product Listing with Card/Table View toggle
+- 🔍 Live Product Search (by name)
+- 📦 Filter products by minimum quantity
+- 🎨 Beautiful and responsive UI using Tailwind CSS
+- 🎥 Framer Motion animations for enhanced interactivity
+- ✏️ Update Product Page
+- ⭐ Star rating display using ReactStars
+- 🔄 Dynamic data loading with loading spinner
+
+---
+
+## 🧰 Tech Stack
+
+### Frontend:
+- React.js
+- React Router DOM
+- Tailwind CSS
+- Framer Motion
+- React Icons
+- React Stars
+- Firebase Authentication
+
+### Backend:
+- Node.js
+- Express.js
+- MongoDB
+- dotenv
+- CORS
+
+---
+
+## 📦 NPM Packages Used
+
+`bash
+npm install react-router-dom
+npm install firebase
+npm install react-icons
+npm install react-stars
+npm install framer-motion
+npm install axios
+npm install express
+npm install mongodb
+npm install cors
+npm install dotenv

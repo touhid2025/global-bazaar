@@ -1,6 +1,6 @@
 import { use, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
-import { FaLeaf, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../provider/AuthProvider';
 import Swal from 'sweetalert2';

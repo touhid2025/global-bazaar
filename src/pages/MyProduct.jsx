@@ -64,7 +64,7 @@ const MyProducts = () => {
           placeholder="Search by name"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="px-4 py-2 border rounded w-80 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+          className="px-4 py-2 border-amber-400 border rounded w-80 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
         />
       </div>
 
