@@ -3,27 +3,27 @@ import { Link } from 'react-router';
 const categories = [
   {
     name: 'Electronics & Gadgets',
-    image: 'https://i.ibb.co/Xfxb0n9n/samsung.jpg',
+    image: 'https://i.ibb.co/7dTHz1KV/macbook.jpg',
     description: 'Discover the latest tech products and gadgets for your wholesale needs.',
   },
   {
     name: 'Home & Kitchen Appliances',
-    image: 'https://i.ibb.co/PZpgPbHz/guiter.jpg',
+    image: 'https://i.ibb.co/8nHxVw5W/home.jpg',
     description: 'Appliances for modern kitchens and homes at unbeatable wholesale prices.',
   },
   {
     name: 'Fashion & Apparel',
-    image: 'https://i.ibb.co/7dTHz1KV/macbook.jpg',
+    image: 'https://i.ibb.co/PsYCxZ59/fashion.jpg',
     description: 'Trendy clothing and apparel for retailers and bulk buyers.',
   },
   {
     name: 'Industrial Machinery & Tools',
-    image: 'https://i.ibb.co/93s9Bwf8/tree4.jpg',
+    image: 'https://i.ibb.co/B8yfnXW/download.jpg',
     description: 'Heavy-duty machinery and tools for your industrial business.',
   },
   {
     name: 'Health & Beauty',
-    image: 'https://i.ibb.co/vCfpggym/tree1.jpg',
+    image: 'https://i.ibb.co/RT9nb3vC/download-1.jpg',
     description: 'Skincare, wellness, and beauty essentials in wholesale bulk.',
   },
 ];
@@ -48,7 +48,7 @@ const ProductCategories = () => {
               <p className="text-sm text-gray-600 mb-3">{category.description}</p>
               <Link
                 to={`/categories/${category.name}`}
-                className="text-amber-600 py-2 px-4 rounded-lg border border-amber-600 hover:bg-amber-600 hover:text-white font-medium"
+                className=" py-2 px-4 rounded-lg border border-amber-600 hover:bg-amber-700 bg-amber-600 text-white font-medium"
               >
                 View Products
               </Link>

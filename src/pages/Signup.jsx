@@ -144,7 +144,7 @@ const Signup = () => {
        googleSign()
     .then((result) => {
       const user = result.user;
-      // console.log(user)
+      
       navigate(`${location.state? location.state : '/'}`)
 	  
       Swal.fire({

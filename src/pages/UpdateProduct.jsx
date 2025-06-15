@@ -44,7 +44,6 @@ const UpdateProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
     fetch(`http://localhost:3000/products/${product._id}`,{
         method: 'PUT',
         headers: {

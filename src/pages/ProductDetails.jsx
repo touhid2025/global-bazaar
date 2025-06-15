@@ -12,14 +12,22 @@ const ProductDetails = () => {
   const products = useLoaderData();            // loader-এ সব products এনেছো
   const { id } = useParams();                  // URL-এর id
   const [product, setProduct] = useState(null);
-  const [buyQty, setBuyQty] = useState(1);
+  const [buyQty, setBuyQty] = useState(null);
   const [showModal, setShowModal] = useState(false);
+
+   useEffect(()=>{
+    if(product){
+      setBuyQty(product.minQuantity)
+    }
+  },[product])
 
   /* ------------ pick single product ------------- */
   useEffect(() => {
     const found = products.find((p) => p._id === id);  // === ব্যবহার = string তুলনা OK
     setProduct(found);
   }, [products, id]);
+
+ 
   
 
   /* ------------ qty handlers ------------- */
@@ -84,11 +92,10 @@ const ProductDetails = () => {
           </h2>
           <p className="text-gray-600 mb-1">Brand: {product.brand}</p>
           <p className="text-gray-600 mb-1">Category: {product.category}</p>
-          <p className="text-gray-600 mb-1">Available: {product.quantity}</p>
+          <p className="text-gray-600 mb-1">Price: ${product.price}</p>
           <p className="text-gray-600 mb-1">Min Order: {product.minQuantity}</p>
-          <p className="text-xl text-amber-700 font-semibold mb-2">
-            ${product.price}
-          </p>
+          <p className="text-amber-600 font-bold mb-1">Available: {product.quantity}</p>
+          
           <ReactStars
             count={5}
             value={product.rating}

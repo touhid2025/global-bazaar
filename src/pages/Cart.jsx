@@ -54,9 +54,9 @@ const Cart = () => {
     });
   };
 
-  if (loading) return <p className="text-center text-amber-500 py-10">Loading cart…</p>;
+  if (loading) return <p className="text-center text-amber-500 text-2xl font-bold animate-bounce py-10">Loading cart…</p>;
   if (!items.length)
-    return <p className="text-center text-amber-600 font-bold py-10">Your cart is empty.</p>;
+    return <p className="text-center  text-amber-600 font-bold py-30">Your cart is empty.</p>;
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-10">
@@ -73,7 +73,7 @@ const Cart = () => {
         {items.map(({ _id, product, qty, date }) => (
           <motion.div
             key={_id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className="bg-amber-200 rounded-lg shadow-md overflow-hidden"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.03 }}

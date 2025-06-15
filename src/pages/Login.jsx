@@ -59,7 +59,7 @@ const Login = () => {
         signIn(formData.email,formData.password)
         .then((result)=>{
 		const user = result.user;
-    // console.log(user)
+    
      navigate(`${location.state? location.state : '/'}`)
 
      Swal.fire({
@@ -99,7 +99,7 @@ const Login = () => {
        googleSign()
     .then((result) => {
       const user = result.user;
-      // console.log(user)
+      
        navigate(`${location.state? location.state : '/'}`)
        Swal.fire({
   title: "Successfully Log In!",
