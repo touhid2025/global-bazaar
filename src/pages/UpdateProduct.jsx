@@ -44,7 +44,7 @@ const UpdateProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/products/${product._id}`,{
+    fetch(`https://assignment-eleven-server-side-snowy.vercel.app/products/${product._id}`,{
         method: 'PUT',
         headers: {
             'content-type':'application/json'
@@ -66,7 +66,7 @@ const UpdateProduct = () => {
     })
     
     
-     // Function passed to handle updating logic
+     
   };
 
 

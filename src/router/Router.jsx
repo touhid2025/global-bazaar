@@ -30,32 +30,32 @@ const router = createBrowserRouter([
               },
               {
                 path: '/all-products',
-                loader: ()=> fetch('http://localhost:3000/products'),
+                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <PrivateRoute><AllProducts></AllProducts></PrivateRoute>,
                 hydrateFallbackElement: <Loader></Loader>,
               },
               {
                 path: '/update/:id',
-                loader: ()=> fetch('http://localhost:3000/products'),
+                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <UpdateProduct></UpdateProduct>,
                  hydrateFallbackElement: <Loader></Loader>,
               },
               {
                 path: '/categories/:id',
-                loader: ()=> fetch('http://localhost:3000/products'),
+                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <ViewProducts></ViewProducts>,
                  hydrateFallbackElement: <Loader></Loader>,
               },
               {
                 path: '/product/:id',
-                loader: ()=> fetch('http://localhost:3000/products'),
+                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
                  hydrateFallbackElement: <Loader></Loader>,
 
               },
               {
                 path: '/my-products',
-                loader: ()=> fetch('http://localhost:3000/products'),
+                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <PrivateRoute><MyProduct></MyProduct></PrivateRoute>,
                 hydrateFallbackElement: <Loader></Loader>,
               },

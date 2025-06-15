@@ -43,7 +43,7 @@ const Why = () => {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {cards.map((item, i) => (
+          {cards.map((item) => (
             <motion.div
               key={item.title}
               className="p-6 bg-amber-200 rounded-lg shadow-md"

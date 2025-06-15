@@ -23,13 +23,7 @@ const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const [product, setProduct] = useState({});
 
-  // const handleChange = (e) => {
-  //   const { name, value, files } = e.target;
-  //   setProduct((prev) => ({
-  //     ...prev,
-  //     [name]: files ? files[0] : value,
-  //   }));
-  // };
+  
 
   const handleChange = (e) => {
   const { name, value, files, type } = e.target;
@@ -44,7 +38,7 @@ const AddProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/products", {
+    fetch("https://assignment-eleven-server-side-snowy.vercel.app/products", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({userName: user.displayName, userEmail: user.email, ...product}),

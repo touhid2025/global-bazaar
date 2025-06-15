@@ -9,8 +9,8 @@ const ProductDetails = () => {
           document.title="GlobalBazaar | Product Details"
           },[]);
   const { user } = useContext(AuthContext);
-  const products = useLoaderData();            // loader-এ সব products এনেছো
-  const { id } = useParams();                  // URL-এর id
+  const products = useLoaderData();           
+  const { id } = useParams();                 
   const [product, setProduct] = useState(null);
   const [buyQty, setBuyQty] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -30,13 +30,13 @@ const ProductDetails = () => {
  
   
 
-  /* ------------ qty handlers ------------- */
+  
   const inc = () => setBuyQty((q) => q + 1);
   const dec = () => setBuyQty((q) => (q > 1 ? q - 1 : 1));
 
-  /* ------------ confirm buy ------------- */
+  
   const handleConfirmBuy = () => {
-    /* 1️⃣ মিনিমাম কোয়ান্টিটি check (client-side) */
+    
     if (buyQty < product.minQuantity) {
       Swal.fire({
         title: "Minimum Quantity Required",
@@ -47,7 +47,7 @@ const ProductDetails = () => {
     }
 
     /* server-side request */
-    fetch("http://localhost:3000/purchase", {
+    fetch("https://assignment-eleven-server-side-snowy.vercel.app/purchase", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

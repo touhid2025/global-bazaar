@@ -13,7 +13,7 @@ const AnimatedStats = () => {
   const [triggerCounts, setTriggerCounts] = useState(0);
   const { ref, inView } = useInView({ triggerOnce: false });
 
-  // যখন inView হবে, triggerCounts বাড়াবে (count reset হবে)
+  
   useEffect(() => {
     if (inView) {
       setTriggerCounts((prev) => prev + 1);

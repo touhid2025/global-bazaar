@@ -40,7 +40,7 @@ const BannerSlider = () => {
   ];
 
   return (
-    <div className="relative border-8 border-y-amber-700 border-x-indigo-700 w-full h-[500px] my-10 md:h-[500px]">
+    <div className="relative border-y-8 border-y-amber-700 w-full h-[500px] my-10 md:h-[500px]">
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
         spaceBetween={0}
@@ -106,8 +106,7 @@ const BannerSlider = () => {
         <div className="swiper-pagination !bottom-4"></div>
       </Swiper>
 
-      {/* Decorative Elements */}
-      {/* <div className="absolute bottom-0 left-0 w-full h-16 bg-gray-200 clip-path-slider-edge z-10"></div> */}
+      
     </div>
   );
 };

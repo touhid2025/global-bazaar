@@ -1,4 +1,3 @@
-// src/pages/Cart.jsx
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import { motion } from 'framer-motion';
@@ -13,10 +12,10 @@ const Cart = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /* 🔄 fetch cart items for this user */
+  /* fetch cart items for this user */
   useEffect(() => {
     if (authLoading) return;
-    fetch(`http://localhost:3000/cart?email=${user.email}`)
+    fetch(`https://assignment-eleven-server-side-snowy.vercel.app/cart?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
@@ -24,7 +23,7 @@ const Cart = () => {
       });
   }, [authLoading, user]);
 
-  /* 🗑️ remove / cancel purchase */
+  /*  remove / cancel purchase */
   const handleRemove = (cartId, productId, qty) => {
     Swal.fire({
       title: 'Remove item?',
@@ -36,7 +35,7 @@ const Cart = () => {
     }).then((result) => {
       if (!result.isConfirmed) return;
 
-      fetch(`http://localhost:3000/cart/${cartId}`, {
+      fetch(`https://assignment-eleven-server-side-snowy.vercel.app/cart/${cartId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ productId, qty }),
