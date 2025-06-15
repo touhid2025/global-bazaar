@@ -5,7 +5,7 @@ const Cart = () => {
               document.title="GlobalBazaar | Cart"
               },[]);
     return (
-        <div>
+        <div className='min-h-screen'>
             cart
         </div>
     );

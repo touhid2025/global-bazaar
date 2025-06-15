@@ -17,7 +17,7 @@ const Extra = ({ products }) => {
     y: 0,
   }}
   transition={{
-    duration: 10,
+    duration: 5,
     repeat: Infinity,
     repeatType: 'loop',
   }}

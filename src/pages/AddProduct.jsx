@@ -23,13 +23,23 @@ const AddProduct = () => {
   const { user } = useContext(AuthContext);
   const [product, setProduct] = useState({});
 
+  // const handleChange = (e) => {
+  //   const { name, value, files } = e.target;
+  //   setProduct((prev) => ({
+  //     ...prev,
+  //     [name]: files ? files[0] : value,
+  //   }));
+  // };
+
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setProduct((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
-  };
+  const { name, value, files, type } = e.target;
+  const parsedValue = type === "number" ? Number(value) : value;
+
+  setProduct((prev) => ({
+    ...prev,
+    [name]: files ? files[0] : parsedValue,
+  }));
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -41,7 +41,7 @@ const Header = () => {
     <nav className="bg-amber-700/85 backdrop-blur-2xl mx-2 md:mx-5 rounded-lg sticky top-2 z-50">
       <div to={'/'} className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <Link className="text-2xl cursor-pointer font-bold text-gray-900">Global<span className="text-white">Bazaar</span></Link>
+        <Link className="text-2xl cursor-pointer font-bold text-white">Global<span className="text-amber-400">Bazaar</span></Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
