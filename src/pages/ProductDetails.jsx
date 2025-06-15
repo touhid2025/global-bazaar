@@ -5,6 +5,9 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 
 const ProductDetails = () => {
+  useEffect(()=>{
+          document.title="GlobalBazaar | Product Details"
+          },[]);
   const { user } = useContext(AuthContext);
   const products = useLoaderData();            // loader-এ সব products এনেছো
   const { id } = useParams();                  // URL-এর id

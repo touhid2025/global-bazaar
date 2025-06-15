@@ -5,6 +5,9 @@ import Swal from 'sweetalert2';
 import { Link, useLoaderData } from 'react-router';
 
 const MyProducts = () => {
+    useEffect(()=>{
+          document.title="GlobalBazaar | My Product"
+          },[]);
     const data = useLoaderData();
   const { user } = useContext(AuthContext);
   const [products, setProducts] = useState([]);

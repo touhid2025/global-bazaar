@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactStars from 'react-stars'
 import { useLoaderData, useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 
 const UpdateProduct = () => {
+  useEffect(()=>{
+            document.title="GlobalBazaar | Update Product"
+            },[]);
     const products = useLoaderData();
     const {id} = useParams();
     const navigate = useNavigate();

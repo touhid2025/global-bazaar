@@ -4,6 +4,9 @@ import ReactStars from 'react-stars';
 import { Link, useLoaderData } from 'react-router';
 
 const AllProducts = () => {
+  useEffect(()=>{
+          document.title="GlobalBazaar | All Product"
+          },[]);
   const [products, setProducts] = useState([]);
   const [availableOnly, setAvailableOnly] = useState(false);
   const [viewMode, setViewMode] = useState('card');

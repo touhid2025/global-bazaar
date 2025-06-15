@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FaUpload, FaTag, FaListUl } from "react-icons/fa";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
@@ -15,6 +15,11 @@ const categories = [
 ];
 
 const AddProduct = () => {
+
+  useEffect(()=>{
+          document.title="GlobalBazaar | Add Product"
+          },[]);
+
   const { user } = useContext(AuthContext);
   const [product, setProduct] = useState({});
 

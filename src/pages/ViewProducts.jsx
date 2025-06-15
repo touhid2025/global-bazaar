@@ -3,6 +3,9 @@ import { useLoaderData, useParams, Link } from 'react-router';
 import ReactStars from 'react-stars'
 
 const ViewProducts = () => {
+  useEffect(()=>{
+          document.title="GlobalBazaar | View Product"
+          },[]);
   const data = useLoaderData();
   const { id } = useParams(); // id = category name passed from URL
   const [products, setProducts] = useState([]);

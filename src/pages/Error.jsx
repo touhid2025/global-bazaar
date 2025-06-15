@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router';
 import error from '../assets/errorr-removebg-preview.png'
 
 const Error = () => {
+	useEffect(()=>{
+			  document.title="GlobalBazaar | Error"
+			  },[]);
     return (
         <div className='bg-amber-50 min-h-screen'>
              <div className='flex justify-center pt-16'>

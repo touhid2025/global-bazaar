@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { FaLeaf, FaUser, FaEnvelope, FaLock, FaCamera, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
@@ -6,6 +6,9 @@ import { AuthContext } from '../provider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Signup = () => {
+  useEffect(()=>{
+            document.title="GlobalBazaar | Signup"
+            },[]);
 	const {createUser,setUser,googleSign,updateUser} = use(AuthContext);
   const navigate = useNavigate();
 	const location = useLocation();

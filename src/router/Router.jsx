@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home";
 import AllProducts from "../pages/AllProducts";
-import Categories from "../pages/Categories"
 import MyProduct from "../pages/MyProduct";
 import Cart from "../pages/Cart";
 import RegisterLayout from "../layout/RegisterLayout";
@@ -33,7 +32,7 @@ const router = createBrowserRouter([
               {
                 path: '/all-products',
                 loader: ()=> fetch('http://localhost:3000/products'),
-                element: <AllProducts></AllProducts>,
+                element: <PrivateRoute><AllProducts></AllProducts></PrivateRoute>,
                 hydrateFallbackElement: <Loader></Loader>,
               },
               {
@@ -41,10 +40,6 @@ const router = createBrowserRouter([
                 loader: ()=> fetch('http://localhost:3000/products'),
                 element: <UpdateProduct></UpdateProduct>,
                  hydrateFallbackElement: <Loader></Loader>,
-              },
-              {
-               path: '/categories',
-               element: <Categories></Categories>,
               },
               {
                 path: '/categories/:id',
@@ -55,7 +50,7 @@ const router = createBrowserRouter([
               {
                 path: '/product/:id',
                 loader: ()=> fetch('http://localhost:3000/products'),
-                element: <ProductDetails></ProductDetails>,
+                element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
                  hydrateFallbackElement: <Loader></Loader>,
 
               },
@@ -67,11 +62,11 @@ const router = createBrowserRouter([
               },
               {
                 path: '/add-product',
-                element: <AddProduct></AddProduct>
+                element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
               },
               {
                 path: 'cart',
-                element: <Cart></Cart>,
+                element: <PrivateRoute><Cart></Cart></PrivateRoute>,
               }
             ],
         },
