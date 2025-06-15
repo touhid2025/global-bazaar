@@ -6,6 +6,9 @@ import Swal from 'sweetalert2';
 import { FaTrash } from 'react-icons/fa';
 
 const Cart = () => {
+    useEffect(()=>{
+          document.title="GlobalBazaar | Cart"
+          },[]);
   const { user, loading: authLoading } = useContext(AuthContext);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,9 +54,9 @@ const Cart = () => {
     });
   };
 
-  if (loading) return <p className="text-center py-10">Loading cart…</p>;
+  if (loading) return <p className="text-center text-amber-500 py-10">Loading cart…</p>;
   if (!items.length)
-    return <p className="text-center py-10">Your cart is empty.</p>;
+    return <p className="text-center text-amber-600 font-bold py-10">Your cart is empty.</p>;
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-10">
@@ -63,7 +66,7 @@ const Cart = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        🛒 My Cart
+         My Cart
       </motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -86,13 +89,13 @@ const Cart = () => {
               <h3 className="text-xl font-semibold text-gray-800">
                 {product.name}
               </h3>
-              <p className="text-sm text-gray-500">
+              <p className=" text-gray-600">
                 Brand: {product.brand} | Cat: {product.category}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className=" text-gray-600">
                 Bought Qty: {qty} | Min Qty (required): {product.minQuantity}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className=" text-gray-600 font-bold">
                 Buying Date:{' '}
                 {new Date(date).toLocaleDateString(undefined, {
                   year: 'numeric',
@@ -104,7 +107,7 @@ const Cart = () => {
 
               <button
                 onClick={() => handleRemove(_id, product._id, qty)}
-                className="mt-3 flex items-center gap-1 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                className="mt-3 cursor-pointer flex items-center gap-1 bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
               >
                 <FaTrash /> Remove
               </button>

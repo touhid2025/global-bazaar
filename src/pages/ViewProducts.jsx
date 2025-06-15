@@ -51,7 +51,7 @@ const ViewProducts = () => {
             />
             <Link
               to={`/product/${product?._id}`}
-              className="mt-auto inline-block text-center bg-amber-600 hover:bg-amber-800 text-white py-2 px-3 rounded transition"
+              className="mt-auto inline-block cursor-pointer text-center bg-amber-600 hover:bg-amber-800 text-white py-2 px-3 rounded transition"
             >
               Details
             </Link>

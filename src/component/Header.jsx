@@ -65,7 +65,7 @@ const Header = () => {
           <NavLink to={'/cart'} className="relative  text-white hover:text-amber-400 cursor-pointer flex gap-1 items-center">
             <FaShoppingCart/>
             <span>Cart</span>
-            <span className="absolute -top-3 left-3">0</span>
+            <span className="absolute -top-3 left-3"></span>
           </NavLink>
           {/* image */}
           
@@ -140,7 +140,7 @@ const Header = () => {
           <NavLink to={'/cart'} className="relative text-white hover:text-amber-400 cursor-pointer flex gap-1 items-center">
             <FaShoppingCart/>
             <span>Cart</span>
-            <span className="absolute -top-3 left-2.5">0</span>
+            <span className="absolute -top-3 left-2.5"></span>
           </NavLink>
           
           {

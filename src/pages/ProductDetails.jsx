@@ -20,6 +20,7 @@ const ProductDetails = () => {
     const found = products.find((p) => p._id === id);  // === ব্যবহার = string তুলনা OK
     setProduct(found);
   }, [products, id]);
+  
 
   /* ------------ qty handlers ------------- */
   const inc = () => setBuyQty((q) => q + 1);
@@ -51,6 +52,8 @@ const ProductDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
+          const newQuantity = product.quantity - buyQty
+          setProduct({...product,quantity: newQuantity})
           Swal.fire("Success", "Product purchased successfully!", "success");
           setShowModal(false);
         } else {
@@ -100,7 +103,7 @@ const ProductDetails = () => {
           {/* Buy button */}
           <button
             onClick={() => setShowModal(true)}
-            className="mt-6 bg-amber-600 text-white px-6 py-2 rounded shadow-md hover:bg-amber-700"
+            className="mt-6 cursor-pointer bg-amber-600 text-white px-6 py-2 rounded shadow-md hover:bg-amber-700"
           >
             Buy
           </button>
@@ -141,7 +144,7 @@ const ProductDetails = () => {
               <div className="flex items-center gap-2 mb-2">
                 <button
                   onClick={dec}
-                  className="p-2 rounded text-white bg-amber-500 hover:bg-amber-600 shadow-md"
+                  className="p-2 rounded cursor-pointer text-white bg-amber-500 hover:bg-amber-600 shadow-md"
                 >
                   –
                 </button>
@@ -153,7 +156,7 @@ const ProductDetails = () => {
                 />
                 <button
                   onClick={inc}
-                  className="p-2 rounded text-white bg-amber-500 hover:bg-amber-600 shadow-md"
+                  className="p-2 cursor-pointer rounded text-white bg-amber-500 hover:bg-amber-600 shadow-md"
                 >
                   +
                 </button>
@@ -161,7 +164,7 @@ const ProductDetails = () => {
 
               <button
                 onClick={handleConfirmBuy}
-                className="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-800"
+                className="w-full bg-amber-600 cursor-pointer text-white py-2 rounded hover:bg-amber-800"
               >
                 Confirm Buy
               </button>

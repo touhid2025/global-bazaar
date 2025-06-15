@@ -46,7 +46,7 @@ const Why = () => {
           {cards.map((item, i) => (
             <motion.div
               key={item.title}
-              className="p-6 bg-white rounded-lg shadow-md"
+              className="p-6 bg-amber-200 rounded-lg shadow-md"
               variants={float}
               animate="animate"
             >

@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import pic1 from '../assets/picu2.png';
 import pic2 from '../assets/pico3.png';
 import pic3 from '../assets/picu1.png'
+import { TypeAnimation } from 'react-type-animation';
 
 
 
@@ -72,12 +73,23 @@ const BannerSlider = () => {
                 loading="lazy"
               />
               
-              <div className="relative h-full flex items-center px-8 md:px-16 text-amber-600">
+              <div className="relative bg-black/50 h-full flex items-center px-8 md:px-16 text-amber-500">
                 <div className="max-w-2xl backdrop-blur-sm">
-                  
-                  <h2 className="text-3xl md:text-5xl font-bold mb-3">{slide.title}</h2>
+                  <TypeAnimation
+      sequence={[
+        // Same substring at the start will only be typed out once, initially
+        `${slide.title}`,
+        1000, // wait 1s before replacing "Mice" with "Hamsters"
+        
+      ]}
+      wrapper="span"
+      speed={50}
+      style={{ fontSize: '3em', fontWeight: 'bolder', display: 'inline-block' }}
+      repeat={Infinity}
+    />
+    
                   <p className="text-lg md:text-xl mb-6 opacity-90">{slide.description}</p>
-                  <button className="px-6 py-3 bg-amber-500 text-white hover:bg-amber-600 font-semibold rounded-full hover:bg-opacity-90 transition flex items-center">
+                  <button className="px-6 py-3 cursor-pointer bg-amber-600 text-white hover:bg-amber-700 font-semibold rounded-full hover:bg-opacity-90 transition flex items-center">
                     {slide.cta} <FaChevronRight className="ml-2" />
                   </button>
                 </div>
