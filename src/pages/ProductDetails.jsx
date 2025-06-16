@@ -21,7 +21,7 @@ const ProductDetails = () => {
     }
   },[product])
 
-  /* ------------ pick single product ------------- */
+  
   useEffect(() => {
     const found = products?.find((p) => p._id === id);  // === ব্যবহার = string তুলনা OK
     setProduct(found);
