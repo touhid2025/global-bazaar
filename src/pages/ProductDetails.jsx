@@ -76,7 +76,7 @@ const ProductDetails = () => {
   /* ------------ loading fallback ------------- */
   if (!product) return <p className="text-center py-10">Loading...</p>;
 
-  /* ------------ main UI ------------- */
+  
   return (
     <div className="max-w-4xl mx-auto p-4">
       {/* product hero */}
