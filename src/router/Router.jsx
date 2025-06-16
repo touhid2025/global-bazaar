@@ -14,6 +14,7 @@ import UpdateProduct from "../pages/UpdateProduct";
 import ViewProducts from "../pages/ViewProducts";
 import ProductDetails from "../pages/ProductDetails";
 import Loader from "../component/Loader";
+import Categories from "../pages/Categories";
 
 
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
                 loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <PrivateRoute><AllProducts></AllProducts></PrivateRoute>,
                 hydrateFallbackElement: <Loader></Loader>,
+              },
+              {
+                path: '/categories',
+                element: <Categories></Categories>,
               },
               {
                 path: '/update/:id',

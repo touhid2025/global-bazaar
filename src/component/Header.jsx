@@ -12,6 +12,7 @@ const Header = () => {
 
   const links = [
     { name: "Home", href: "/" },
+    { name: "Categories", href: "/categories" },
     { name: "All Products", href: "/all-products" },
     { name: "Add Product", href: "/add-product" },
     { name: "My Products", href: "/my-products" },

@@ -7,7 +7,7 @@ const ViewProducts = () => {
           document.title="GlobalBazaar | View Product"
           },[]);
   const data = useLoaderData();
-  const { id } = useParams(); // id = category name passed from URL
+  const { id } = useParams();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {

@@ -19,12 +19,12 @@ const AllProducts = () => {
 
   // Filter by quantity if checked
   let filteredProducts = availableOnly
-    ? products.filter(p => p.minQuantity > 100)
+    ? products?.filter(p => p.minQuantity > 100)
     : products;
 
   // Filter by search
   if (searchTerm.trim()) {
-    filteredProducts = filteredProducts.filter(p =>
+    filteredProducts = filteredProducts?.filter(p =>
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }

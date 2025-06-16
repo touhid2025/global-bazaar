@@ -53,7 +53,7 @@ const Cart = () => {
     });
   };
 
-  if (loading) return <p className="text-center text-amber-500 text-2xl font-bold animate-bounce py-10">Loading cart…</p>;
+  if (loading) return <p className="text-center py-30 text-amber-600 text-xl animate-pulse font-bold">Loading cart…</p>;
   if (!items.length)
     return <p className="text-center  text-amber-600 font-bold py-30">Your cart is empty.</p>;
 

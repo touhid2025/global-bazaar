@@ -15,7 +15,7 @@ const MyProducts = () => {
 
   // Fetch user-specific products
   useEffect(() => {
-    const filteredData = data.filter((p)=> p.userEmail == user.email);
+    const filteredData = data?.filter((p)=> p.userEmail == user.email);
     setProducts(filteredData)
   }, [data,user]);
 
@@ -38,7 +38,7 @@ const MyProducts = () => {
           .then(data => {
             if (data.deletedCount > 0) {
               Swal.fire('Deleted!', 'Product has been deleted.', 'success');
-              setProducts(products.filter(p => p._id !== id));
+              setProducts(products?.filter(p => p._id !== id));
             }
           });
       }
@@ -46,7 +46,7 @@ const MyProducts = () => {
   };
 
   // Filtered products
-  const filteredProducts = products.filter(p =>
+  const filteredProducts = products?.filter(p =>
     p.name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -75,7 +75,7 @@ const MyProducts = () => {
         <p className="text-center text-gray-500">No matching products found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredProducts.map(product => (
+          {filteredProducts?.map(product => (
             <motion.div
               key={product._id}
               className="bg-amber-100 rounded-lg shadow-md overflow-hidden"
