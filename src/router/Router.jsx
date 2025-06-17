@@ -50,7 +50,9 @@ const router = createBrowserRouter([
               },
               {
                 path: '/product/:id',
+                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
+                hydrateFallbackElement: <Loader></Loader>,
                 
 
               },

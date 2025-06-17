@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLoaderData, useParams } from "react-router";
 import ReactStars from "react-stars";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
-import Loader from "../component/Loader";
+
 
 const ProductDetails = () => {
   useEffect(()=>{
@@ -11,44 +11,25 @@ const ProductDetails = () => {
           },[]);
   const { user } = useContext(AuthContext);           
   const { id } = useParams(); 
+  const data = useLoaderData();
                   
   
   const [buyQty, setBuyQty] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [products,setProducts] = useState([]);
-  // const [product,setProduct] = useState(null);
-
   
-
-  const product = products?.find((p) => p._id == id);
-
-  
-  // useEffect(() => {
-  //   if(products){
-  //     const found = products?.find((p) => p._id == id);  
-  //   setProduct(found);
-  //   }
-  // }, [products, id]);
+  const [product,setProduct] = useState(null);
 
  
-  useEffect(() => {
-  const token = localStorage.getItem('access-token');
 
-  fetch('https://assignment-eleven-server-side-snowy.vercel.app/products', {
-    method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      setProducts(data)
-    });
-}, []);
-
-
-     
   
+  useEffect(() => {
+    
+      const found = data?.find((p) => p._id == id);  
+    setProduct(found);
+    
+  }, [data,id]);
+
+ 
 
    useEffect(()=>{
     if(product){
@@ -62,7 +43,7 @@ const ProductDetails = () => {
 
   
   const handleConfirmBuy = () => {
-    const token = localStorage.getItem('access-token');
+    
     
     if (buyQty < product.minQuantity) {
       Swal.fire({
@@ -77,7 +58,7 @@ const ProductDetails = () => {
     fetch("https://assignment-eleven-server-side-snowy.vercel.app/purchase", {
       
       method: "POST",
-      headers: { "Content-Type": "application/json",'Authorization': `Bearer ${token}` },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         productId: product._id,
         quantity: buyQty,
@@ -89,7 +70,7 @@ const ProductDetails = () => {
       .then((data) => {
         if (data.success) {
           const newQuantity = product.quantity - buyQty
-          setProducts({...product,quantity: newQuantity})
+          setProduct({...product,quantity: newQuantity})
           Swal.fire("Success", "Product purchased successfully!", "success");
           setShowModal(false);
            
@@ -104,7 +85,7 @@ const ProductDetails = () => {
   };
 
   /* ------------ loading fallback ------------- */
-  if (products.length === 0) return <Loader></Loader>;
+  
 
   
   return (
