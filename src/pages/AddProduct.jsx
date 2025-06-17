@@ -36,11 +36,12 @@ const AddProduct = () => {
 };
 
   const handleSubmit = (e) => {
+    const token = localStorage.getItem('access-token');
     e.preventDefault();
 
     fetch("https://assignment-eleven-server-side-snowy.vercel.app/products", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json",'Authorization': `Bearer ${token}`, },
       body: JSON.stringify({userName: user.displayName, userEmail: user.email, ...product}),
     })
       .then((res) => res.json())
@@ -231,7 +232,7 @@ const AddProduct = () => {
         <div className="md:col-span-2">
           <button
             type="submit"
-            className="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 rounded transition"
+            className="w-full cursor-pointer bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 rounded transition"
           >
             <FaUpload className="inline mr-2" />
             Add Product

@@ -1,28 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ReactStars from 'react-stars'
-import { useLoaderData, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../provider/AuthProvider';
+import Loader from '../component/Loader';
 
 const UpdateProduct = () => {
   useEffect(()=>{
             document.title="GlobalBazaar | Update Product"
             },[]);
-    const products = useLoaderData();
+    
+    const [products, setProducts] = useState(null)
     const {id} = useParams();
     const navigate = useNavigate();
+    const {loading: authLoading } = useContext(AuthContext);
+       const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+  const token = localStorage.getItem('access-token');
+
+  if(authLoading) return;
+
+  fetch('https://assignment-eleven-server-side-snowy.vercel.app/products', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      setProducts(data)
+      setLoading(false);
+    });
+}, [authLoading]);
 
     
-    const product = products.find(plan => plan._id == id);
-  const [formData, setFormData] = useState({
-    imageURL: product?.imageURL || '',
-    name: product?.name || '',
-    brand: product?.brand || '',
-    category: product?.category || '',
-    rating: product?.rating || 0,
-    description: product?.description || '',
-    quantity: product?.quantity || 0,
-    minQuantity: product?.minQuantity || 0,
-  });
+    const product = products?.find(plan => plan._id == id);
+  const [formData, setFormData] = useState(null);
+    // imageURL: product?.imageURL || '',
+    // name: product?.name || '',
+    // brand: product?.brand || '',
+    // category: product?.category || '',
+    // rating: product?.rating || 0,
+    // description: product?.description || '',
+    // quantity: product?.quantity || 0,
+    // minQuantity: product?.minQuantity || 0,
+  
 
   const categories = [
     'Electronics & Gadgets',
@@ -43,11 +67,13 @@ const UpdateProduct = () => {
   };
 
   const handleSubmit = (e) => {
+    const token = localStorage.getItem('access-token');
     e.preventDefault();
     fetch(`https://assignment-eleven-server-side-snowy.vercel.app/products/${product._id}`,{
         method: 'PUT',
         headers: {
-            'content-type':'application/json'
+            'content-type':'application/json',
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(formData)
     })
@@ -70,7 +96,7 @@ const UpdateProduct = () => {
   };
 
 
-  
+  if (loading) return <Loader></Loader>;
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-amber-100 shadow-md rounded-lg">
@@ -81,7 +107,7 @@ const UpdateProduct = () => {
           type="text"
           name="imageURL"
           placeholder="Image URL"
-          defaultValue={formData.imageURL}
+          defaultValue={product?.imageURL}
           onChange={handleChange}
           className="w-full border p-2 rounded"
         />
@@ -90,7 +116,7 @@ const UpdateProduct = () => {
           type="text"
           name="name"
           placeholder="Product Name"
-          defaultValue={formData.name}
+          defaultValue={product?.name}
           onChange={handleChange}
           className="w-full border p-2 rounded"
         />
@@ -99,14 +125,14 @@ const UpdateProduct = () => {
           type="text"
           name="brand"
           placeholder="Brand Name"
-          defaultValue={formData.brand}
+          defaultValue={product?.brand}
           onChange={handleChange}
           className="w-full border p-2 rounded"
         />
         <label className="mb-1 font-semibold">Category</label>
         <select
           name="category"
-          defaultValue={formData.category}
+          defaultValue={product?.category}
           onChange={handleChange}
           className="w-full border p-2 rounded"
         >
@@ -118,7 +144,7 @@ const UpdateProduct = () => {
         <label className="mb-1 font-semibold">Rating</label>
         <ReactStars
           count={5}
-          value={formData.rating}
+          value={product?.rating || 0}
           onChange={handleRatingChange}
           size={24}
           activeColor="#ffd700"
@@ -127,7 +153,7 @@ const UpdateProduct = () => {
         <textarea
           name="description"
           placeholder="Product Description"
-          defaultValue={formData.description}
+          defaultValue={product?.description}
           onChange={handleChange}
           className="w-full border p-2 rounded"
         ></textarea>
@@ -136,7 +162,7 @@ const UpdateProduct = () => {
           type="number"
           name="quantity"
           placeholder="Quantity"
-          defaultValue={formData.quantity}
+          defaultValue={product?.quantity}
           onChange={handleChange}
           className="w-full border p-2 rounded"
         />
@@ -145,13 +171,13 @@ const UpdateProduct = () => {
           type="number"
           name="minQuantity"
           placeholder="Minimum Selling Quantity"
-          defaultValue={formData.minQuantity}
+          defaultValue={product?.minQuantity}
           onChange={handleChange}
           className="w-full border p-2 rounded"
         />
         <button
           type="submit"
-          className="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-800"
+          className="w-full cursor-pointer bg-amber-600 text-white py-2 rounded hover:bg-amber-800"
         >
           Update Product
         </button>

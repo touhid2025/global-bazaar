@@ -59,8 +59,22 @@ const Login = () => {
         signIn(formData.email,formData.password)
         .then((result)=>{
 		const user = result.user;
+     
     
-     navigate(`${location.state? location.state : '/'}`)
+     
+
+     
+fetch('https://assignment-eleven-server-side-snowy.vercel.app/jwt', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email: user.email }) 
+})
+  .then(res => res.json())
+  .then(data => {
+    localStorage.setItem('access-token', data.token);
+    
+    navigate(`${location.state? location.state : '/'}`)
+  });
 
      Swal.fire({
   title: "Successfully Log In!",
@@ -100,7 +114,20 @@ const Login = () => {
     .then((result) => {
       const user = result.user;
       
-       navigate(`${location.state? location.state : '/'}`)
+    
+       
+       fetch('https://assignment-eleven-server-side-snowy.vercel.app/jwt', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email: user.email }) 
+})
+  .then(res => res.json())
+  .then(data => {
+    localStorage.setItem('access-token', data.token);
+    
+    navigate(`${location.state? location.state : '/'}`)
+  });
+
        Swal.fire({
   title: "Successfully Log In!",
   icon: "success",

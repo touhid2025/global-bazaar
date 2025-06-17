@@ -2,25 +2,49 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
-import { Link, useLoaderData } from 'react-router';
+import { Link } from 'react-router';
+import Loader from '../component/Loader';
 
 const MyProducts = () => {
     useEffect(()=>{
           document.title="GlobalBazaar | My Product"
           },[]);
-    const data = useLoaderData();
-  const { user } = useContext(AuthContext);
+    const [data,setData] = useState(null)
+  const { user, loading: authLoading } = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  // Fetch user-specific products
+  
   useEffect(() => {
-    const filteredData = data?.filter((p)=> p.userEmail == user.email);
+    if(data && user.email){
+      const filteredData = data.filter((p)=> p.userEmail == user.email);
     setProducts(filteredData)
+    }
+    
   }, [data,user]);
 
-  // Delete Handler
+
+  useEffect(() => {
+  const token = localStorage.getItem('access-token');
+  if(authLoading) return;
+
+  fetch('https://assignment-eleven-server-side-snowy.vercel.app/products', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+    .then(res => res.json())
+    .then(dat => {
+      setData(dat)
+       setLoading(false);
+    });
+}, [authLoading]);
+
+ 
   const handleDelete = id => {
+    const token = localStorage.getItem('access-token');
     Swal.fire({
       title: 'Are you sure?',
       text: "This product will be permanently deleted!",
@@ -33,6 +57,9 @@ const MyProducts = () => {
       if (result.isConfirmed) {
         fetch(`https://assignment-eleven-server-side-snowy.vercel.app/products/${id}`, {
           method: 'DELETE',
+          headers: {
+           'Authorization': `Bearer ${token}`,
+    }
         })
           .then(res => res.json())
           .then(data => {
@@ -45,10 +72,11 @@ const MyProducts = () => {
     });
   };
 
-  // Filtered products
+  
   const filteredProducts = products?.filter(p =>
     p.name.toLowerCase().includes(search.toLowerCase())
   );
+  if (loading) return <Loader></Loader>;
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-10">
@@ -71,7 +99,7 @@ const MyProducts = () => {
         />
       </div>
 
-      {filteredProducts.length === 0 ? (
+      {filteredProducts?.length === 0 ? (
         <p className="text-center text-gray-500">No matching products found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -102,7 +130,7 @@ const MyProducts = () => {
                     Edit
                   </Link>
                   <button
-                    className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
+                    className="px-3 py-1 cursor-pointer text-sm bg-red-500 text-white rounded hover:bg-red-600"
                     onClick={() => handleDelete(product._id)}
                   >
                     Delete

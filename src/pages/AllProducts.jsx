@@ -1,21 +1,26 @@
 import { useState, useEffect } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import ReactStars from 'react-stars';
-import { Link, useLoaderData } from 'react-router';
+import { Link, useLoaderData} from 'react-router';
 
 const AllProducts = () => {
   useEffect(()=>{
           document.title="GlobalBazaar | All Product"
           },[]);
+
+  const data = useLoaderData();
   const [products, setProducts] = useState([]);
   const [availableOnly, setAvailableOnly] = useState(false);
   const [viewMode, setViewMode] = useState('card');
   const [searchTerm, setSearchTerm] = useState('');
-  const data = useLoaderData();
+  
+  useEffect(()=>{
+    if(data){
+      setProducts(data)
+    }
+  },[data])
+  
 
-  useEffect(() => {
-    setProducts(data);
-  }, [data]);
 
   // Filter by quantity if checked
   let filteredProducts = availableOnly
@@ -28,6 +33,8 @@ const AllProducts = () => {
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
+
+  // if (loading) return <Loader></Loader>;
  
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">

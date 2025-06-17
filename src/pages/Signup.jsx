@@ -36,12 +36,12 @@ const Signup = () => {
     } else {
       setFormData({...formData, [name]: value});
       
-      // Clear error when field is edited
+    
       if (errors[name]) {
         setErrors({...errors, [name]: null});
       }
       
-      // Check password strength in real-time
+      
       if (name === 'password') {
         checkPasswordStrength(value);
       }
@@ -88,14 +88,25 @@ const Signup = () => {
     e.preventDefault();
     if (validateForm()) {
       setIsLoading(true);
-      // Simulate API call
+      
       setTimeout(() => {
         
         createUser(formData.email, formData.password)
 		.then(result=>{
 			const user = result.user;
 			setUser(user)
-      navigate(`${location.state? location.state : '/'}`)
+      
+      fetch('https://assignment-eleven-server-side-snowy.vercel.app/jwt', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email: user.email }) 
+})
+  .then(res => res.json())
+  .then(data => {
+    localStorage.setItem('access-token', data.token);
+    
+    navigate(`${location.state? location.state : '/'}`)
+  });
       Swal.fire({
   title: "Sign Successfully!",
   icon: "success",
@@ -106,8 +117,8 @@ const Signup = () => {
 			setUser({...user,displayName: formData.name, photoURL: formData.photoURL});
 		 })
 		 .catch((error) => {
-			// An error occurred
-			// ...
+			
+			
 			alert(error)
 			setUser(user)
 		  });
@@ -138,14 +149,25 @@ const Signup = () => {
 
   const handleGoogleRegister = () => {
     setIsLoading(true);
-    // Simulate Google auth
+    
     setTimeout(() => {
       
        googleSign()
     .then((result) => {
       const user = result.user;
       
-      navigate(`${location.state? location.state : '/'}`)
+      
+      fetch('https://assignment-eleven-server-side-snowy.vercel.app/jwt', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email: user.email }) 
+})
+  .then(res => res.json())
+  .then(data => {
+    localStorage.setItem('access-token', data.token);
+    
+    navigate(`${location.state? location.state : '/'}`)
+  });
 	  
       Swal.fire({
   title: "Log In Successfully!",

@@ -3,6 +3,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
 import { FaTrash } from 'react-icons/fa';
+import Loader from '../component/Loader';
 
 const Cart = () => {
     useEffect(()=>{
@@ -12,19 +13,28 @@ const Cart = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /* fetch cart items for this user */
+  
+
   useEffect(() => {
-    if (authLoading) return;
-    fetch(`https://assignment-eleven-server-side-snowy.vercel.app/cart?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
-        setLoading(false);
-      });
-  }, [authLoading, user]);
+  const token = localStorage.getItem('access-token');
+  if(authLoading) return;
+
+  fetch(`https://assignment-eleven-server-side-snowy.vercel.app/cart?email=${user.email}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      setItems(data);
+      setLoading(false);
+    });
+}, [authLoading,user]);
 
   /*  remove / cancel purchase */
   const handleRemove = (cartId, productId, qty) => {
+    const token = localStorage.getItem('access-token');
     Swal.fire({
       title: 'Remove item?',
       text: `This will cancel your order of ${qty} unit(s).`,
@@ -37,7 +47,8 @@ const Cart = () => {
 
       fetch(`https://assignment-eleven-server-side-snowy.vercel.app/cart/${cartId}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+       
         body: JSON.stringify({ productId, qty }),
       })
         .then((res) => res.json())
@@ -53,7 +64,7 @@ const Cart = () => {
     });
   };
 
-  if (loading) return <p className="text-center py-30 text-amber-600 text-xl animate-pulse font-bold">Loading cart…</p>;
+  if (loading) return <Loader></Loader>;
   if (!items.length)
     return <p className="text-center  text-amber-600 font-bold py-30">Your cart is empty.</p>;
 

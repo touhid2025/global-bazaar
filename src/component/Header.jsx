@@ -27,6 +27,7 @@ const Header = () => {
   icon: "success",
   draggable: true
   });
+  localStorage.removeItem("access-token");
         }).catch((error) => {
           // An error happened.
           Swal.fire({

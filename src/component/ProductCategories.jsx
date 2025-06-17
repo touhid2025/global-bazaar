@@ -18,12 +18,12 @@ const categories = [
   },
   {
     name: 'Industrial Machinery & Tools',
-    image: 'https://i.ibb.co/B8yfnXW/download.jpg',
+    image: 'https://i.ibb.co/ymffzTCM/download-4.jpg',
     description: 'Heavy-duty machinery and tools for your industrial business.',
   },
   {
     name: 'Health & Beauty',
-    image: 'https://i.ibb.co/RT9nb3vC/download-1.jpg',
+    image: 'https://i.ibb.co/rKm5syvn/download-7.jpg',
     description: 'Skincare, wellness, and beauty essentials in wholesale bulk.',
   },
 ];

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams, Link } from 'react-router';
 import ReactStars from 'react-stars'
+import Loader from '../component/Loader';
 
 const ViewProducts = () => {
   useEffect(()=>{
@@ -17,6 +18,8 @@ const ViewProducts = () => {
     }
   }, [data, id]);
 
+  if(products.length === 0) return <Loader></Loader>
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h2 className="text-3xl text-amber-600 font-bold text-center mb-8">Products in {id}</h2>
@@ -26,7 +29,7 @@ const ViewProducts = () => {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {products.map((product) => (
+        {products?.map((product) => (
           <div
             key={product._id}
             className="rounded-lg bg-amber-100 shadow-xl hover:shadow transition p-4 flex flex-col"

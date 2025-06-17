@@ -27,7 +27,6 @@ const router = createBrowserRouter([
               {
                 path: '/',
                 element: <Home></Home>,
-                hydrateFallbackElement: <Loader></Loader>,
               },
               {
                 path: '/all-products',
@@ -41,9 +40,7 @@ const router = createBrowserRouter([
               },
               {
                 path: '/update/:id',
-                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
-                element: <UpdateProduct></UpdateProduct>,
-                 hydrateFallbackElement: <Loader></Loader>,
+                element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>,
               },
               {
                 path: '/categories/:id',
@@ -53,23 +50,20 @@ const router = createBrowserRouter([
               },
               {
                 path: '/product/:id',
-                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
-                 hydrateFallbackElement: <Loader></Loader>,
+                
 
               },
               {
                 path: '/my-products',
-                loader: ()=> fetch('https://assignment-eleven-server-side-snowy.vercel.app/products'),
                 element: <PrivateRoute><MyProduct></MyProduct></PrivateRoute>,
-                hydrateFallbackElement: <Loader></Loader>,
               },
               {
                 path: '/add-product',
                 element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
               },
               {
-                path: 'cart',
+                path: '/cart',
                 element: <PrivateRoute><Cart></Cart></PrivateRoute>,
               }
             ],

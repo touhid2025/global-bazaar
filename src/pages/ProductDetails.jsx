@@ -1,19 +1,54 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router";   // ✅ react-router-dom
+import { useParams } from "react-router";
 import ReactStars from "react-stars";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
+import Loader from "../component/Loader";
 
 const ProductDetails = () => {
   useEffect(()=>{
           document.title="GlobalBazaar | Product Details"
           },[]);
-  const { user } = useContext(AuthContext);
-  const products = useLoaderData();           
-  const { id } = useParams();                 
-  const [product, setProduct] = useState(null);
+  const { user } = useContext(AuthContext);           
+  const { id } = useParams(); 
+                  
+  
   const [buyQty, setBuyQty] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [products,setProducts] = useState([]);
+  // const [product,setProduct] = useState(null);
+
+  
+
+  const product = products?.find((p) => p._id == id);
+
+  
+  // useEffect(() => {
+  //   if(products){
+  //     const found = products?.find((p) => p._id == id);  
+  //   setProduct(found);
+  //   }
+  // }, [products, id]);
+
+ 
+  useEffect(() => {
+  const token = localStorage.getItem('access-token');
+
+  fetch('https://assignment-eleven-server-side-snowy.vercel.app/products', {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      setProducts(data)
+    });
+}, []);
+
+
+     
+  
 
    useEffect(()=>{
     if(product){
@@ -22,20 +57,12 @@ const ProductDetails = () => {
   },[product])
 
   
-  useEffect(() => {
-    const found = products?.find((p) => p._id === id);  // === ব্যবহার = string তুলনা OK
-    setProduct(found);
-  }, [products, id]);
-
- 
-  
-
-  
   const inc = () => setBuyQty((q) => q + 1);
   const dec = () => setBuyQty((q) => (q > 1 ? q - 1 : 1));
 
   
   const handleConfirmBuy = () => {
+    const token = localStorage.getItem('access-token');
     
     if (buyQty < product.minQuantity) {
       Swal.fire({
@@ -48,8 +75,9 @@ const ProductDetails = () => {
 
     /* server-side request */
     fetch("https://assignment-eleven-server-side-snowy.vercel.app/purchase", {
+      
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",'Authorization': `Bearer ${token}` },
       body: JSON.stringify({
         productId: product._id,
         quantity: buyQty,
@@ -61,9 +89,11 @@ const ProductDetails = () => {
       .then((data) => {
         if (data.success) {
           const newQuantity = product.quantity - buyQty
-          setProduct({...product,quantity: newQuantity})
+          setProducts({...product,quantity: newQuantity})
           Swal.fire("Success", "Product purchased successfully!", "success");
           setShowModal(false);
+           
+          
         } else {
           Swal.fire("Error", data.message || "Something went wrong", "error");
         }
@@ -74,7 +104,7 @@ const ProductDetails = () => {
   };
 
   /* ------------ loading fallback ------------- */
-  if (!product) return <p className="text-center py-10">Loading...</p>;
+  if (products.length === 0) return <Loader></Loader>;
 
   
   return (
@@ -82,29 +112,29 @@ const ProductDetails = () => {
       {/* product hero */}
       <div className="flex flex-col md:flex-row gap-6">
         <img
-          src={product.imageURL}
-          alt={product.name}
+          src={product?.imageURL}
+          alt={product?.name}
           className="w-full md:w-1/2 rounded shadow"
         />
         <div className="flex-1">
           <h2 className="text-3xl text-amber-600 font-bold mb-2">
-            {product.name}
+            {product?.name}
           </h2>
-          <p className="text-gray-600 mb-1">Brand: {product.brand}</p>
-          <p className="text-gray-600 mb-1">Category: {product.category}</p>
-          <p className="text-gray-600 mb-1">Price: ${product.price}</p>
-          <p className="text-gray-600 mb-1">Min Order: {product.minQuantity}</p>
-          <p className="text-amber-600 font-bold mb-1">Available: {product.quantity}</p>
+          <p className="text-gray-600 mb-1">Brand: {product?.brand}</p>
+          <p className="text-gray-600 mb-1">Category: {product?.category}</p>
+          <p className="text-gray-600 mb-1">Price: ${product?.price}</p>
+          <p className="text-gray-600 mb-1">Min Order: {product?.minQuantity}</p>
+          <p className="text-amber-600 font-bold mb-1">Available: {product?.quantity}</p>
           
           <ReactStars
             count={5}
-            value={product.rating}
+            value={product?.rating}
             edit={false}
             size={24}
             activeColor="#ffd700"
           />
           <p className="mt-4 text-gray-700 whitespace-pre-line">
-            {product.description}
+            {product?.description}
           </p>
 
           {/* Buy button */}
