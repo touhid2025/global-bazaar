@@ -6,7 +6,7 @@ GlobalBazaar is a full-stack e-commerce web application where users can browse, 
 
 ## 🌐 Live URL
 
-🔗 [https://global-bazar-894f3.web.app/](https://globalbazaar.web.app)
+🔗 [[https://global-bazar-894f3.web.app/](https://flourishing-syrniki-4cda53.netlify.app/)]
 
 ---
 
